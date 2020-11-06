@@ -2,9 +2,9 @@
 
 Collection of Ansible OCS roles
 
-=== Setup your environment
+## Setup your environment
 
-----
+```shell
 subscription-manager repos --enable="rhel-7-server-ansible-2.7-rpms"
 yum update ansible
 
@@ -13,10 +13,10 @@ subscription-manager repos --enable rhel-server-rhscl-7-rpms
 yum install python27-python-pip
 pip install -U setuptools
 pip install --user openshift kubernetes
-----
+```
 
-=== Running individual roles
+## Running individual roles
 
-----
+```shell
 ansible-playbook roles/<role-name>/apply/main.yaml
-----
+```
