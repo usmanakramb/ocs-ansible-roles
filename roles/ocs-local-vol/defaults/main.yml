@@ -1,0 +1,4 @@
+---
+# defaults file for ocs-local-vol
+
+default_storageclass: "ocs-storagecluster-ceph-rbd"

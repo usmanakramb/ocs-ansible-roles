@@ -1,0 +1,36 @@
+---
+# tasks file for local-storage
+
+- name: Create local-storage Namespace
+  command: oc apply -f {{ role_path }}/files/local-storage-namespace.yaml
+  register: reg_ls_namespace
+  changed_when: reg_ls_namespace is not search(' unchanged')
+
+- name: Create OperatorGroup local-storage-group
+  command: oc apply -f {{ role_path }}/files/local-storage-og.yaml
+  register: reg_ls_og
+  changed_when: reg_ls_og is not search(' unchanged')
+
+- name: Create Subscription for local-storage
+  command: oc apply -f {{ role_path }}/files/local-storage-sub.yaml
+  register: reg_ls_sub
+  changed_when: reg_ls_sub is not search(' unchanged')
+
+- name: Wait for local-storage operator
+  k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    namespace: local-storage
+  register: operators
+  vars:
+    status_query: "resources[*].status.phase"
+    update_status: "{{ operators | json_query(status_query) | flatten | unique }}"
+  until:
+    - update_status == ['Succeeded']
+  retries: 10
+  delay: 30
+
+- name: Create LocalVolume object for OSD volume
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'localvolume-osd.yaml.j2') }}"

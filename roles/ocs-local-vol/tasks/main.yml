@@ -1,0 +1,8 @@
+---
+# tasks file for ocs-local-vol
+
+- include_tasks: create-namespace.yaml
+- include_tasks: create-rook-ceph-operator-config.yaml
+- include_tasks: setup-subscriptions.yaml
+- include_tasks: create-storagecluster.yaml
+#- include_tasks: setup-default-storageclass.yaml

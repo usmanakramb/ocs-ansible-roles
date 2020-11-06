@@ -1,0 +1,5 @@
+---
+- name: Create ConfigMap for Rook Ceph Operator Config
+  command: oc apply -f {{ role_path }}/files/rook-ceph-operator-config.yaml
+  register: reg_rook_ceph_operator_cm
+  changed_when: reg_rook_ceph_operator_cm is not search(' unchanged')

@@ -1,0 +1,65 @@
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  name: local-block
+  namespace: local-storage
+  labels:
+    apps: ocs-storagecluster
+spec:
+  tolerations:
+  - key: "node.ocs.openshift.io/storage"
+    value: "true"
+    effect: NoSchedule
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+        - key: cluster.ocs.openshift.io/openshift-storage
+          operator: In
+          values:
+          - ""
+  storageClassDevices:
+    - storageClassName: localblock
+      volumeMode: Block
+      devicePaths:
+          # NODE:ip-10-226-6-74.eu-west-1.compute.internal
+          # nvme1n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0bb3c9aa1bc22b9ef
+          # nvme2n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol00d9fb0c0c9b2f9bd
+          # nvme3n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0c7a9b4cec115ef63
+          # NODE:ip-10-226-7-226.eu-west-1.compute.internal
+          # nvme1n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0ada04193c6fc765a
+          # nvme2n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0d309efbc590d4868
+          # nvme3n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0239081209a3a46e9
+          # NODE:ip-10-226-7-202.eu-west-1.compute.internal
+          # nvme1n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol090fd7c7ad9d048fd
+          # nvme2n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0320608286de0d88b
+          # nvme3n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0883f70dd1d99c019
+          # NODE:ip-10-226-6-191.eu-west-1.compute.internal
+          # nvme1n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol053dd216d6f847e0a
+          # nvme2n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0b9399ba50ec009df
+          # nvme3n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol04f2774bd7718df96
+          # NODE:ip-10-226-6-156.eu-west-1.compute.internal
+          # nvme1n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0804938b035c85072
+          # nvme2n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0799ab1f5ae148b8b
+          # nvme3n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol04a87688260772988
+          # NODE:ip-10-226-6-23.eu-west-1.compute.internal
+          # nvme1n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol03e90dfe7fa68491f
+          # nvme2n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0aefcaba190a83c6e
+          # nvme3n1 : 3.9T
+        - /dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_vol0636bc3625379da55
