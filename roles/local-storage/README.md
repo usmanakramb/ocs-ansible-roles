@@ -11,10 +11,12 @@ Worker nodes should have one or more disks to create PVs. Update device paths in
 Example Playbook
 ----------------
 
+```yaml
 - hosts: localhost
   tasks:
     - include_role:
         name: local-storage
+```
 
 License
 -------

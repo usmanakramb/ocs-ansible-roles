@@ -24,10 +24,12 @@ Local storage operator has already been deployed (local storage role can be used
 Example Playbook
 ----------------
 
+```yaml
 - hosts: localhost
   tasks:
     - include_role:
         name: ocs-local-vol
+```
 
 License
 -------
